@@ -44,7 +44,7 @@ void addItem() {
     newItem.id = id;
 
     printf("Enter Item Name: ");
-    scanf(" %[^\n]", newItem.name);  
+    scanf(" %[^\n]", newItem.name);  // fixed: removed stray "newline"
     printf("Enter Item Price: ");
     scanf("%f", &newItem.price);
     printf("Enter Stock Quantity: ");
@@ -58,6 +58,8 @@ void addItem() {
     inventory[itemCount++] = newItem;
     printf("Item added successfully!\n");
 }
+
+
 void displayItems() {
     if (itemCount == 0) {
         printf("No items in inventory.\n");
@@ -97,6 +99,10 @@ void updateStock() {
     if (index != -1) {
         printf("Enter new stock quantity: ");
         scanf("%d", &newStock);
+        if (newStock < 0) {
+            printf("Stock cannot be negative.\n");
+            return;
+        }
         inventory[index].stock = newStock;
         printf("Stock updated successfully.\n");
     } else {
@@ -141,3 +147,4 @@ int main() {
 
     return 0;
 }
+
